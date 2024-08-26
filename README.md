@@ -72,7 +72,7 @@ The following flags must be supplied to the container when starting:
 
 **[--setParameter auditAuthorizationSuccess=true](https://www.mongodb.com/docs/manual/reference/parameters/#mongodb-parameter-param.auditAuthorizationSuccess)**: Enables the auditing of authorization successes for the authCheck action.
 
-**[--setParameter authenticationMechanisms=SCRAM-SHA-256](https://www.mongodb.com/docs/manual/reference/parameters/#mongodb-parameter-param.authenticationMechanisms)*8: Specifies the list of authentication mechanisms the server accepts. Set this to one or more of the following values. If you specify multiple values, use a comma-separated list and no spaces. This should be set to `SCRAM-SHA-256` unless using X.509 Certificates, Kerberos, or LDAP SASL. For more information, please review the [authenticationMechanisms](https://www.mongodb.com/docs/manual/reference/parameters/#mongodb-parameter-param.authenticationMechanisms) documentation.
+**[--setParameter authenticationMechanisms=SCRAM-SHA-256](https://www.mongodb.com/docs/manual/reference/parameters/#mongodb-parameter-param.authenticationMechanisms)**: Specifies the list of authentication mechanisms the server accepts. Set this to one or more of the following values. If you specify multiple values, use a comma-separated list and no spaces. This should be set to `SCRAM-SHA-256` unless using X.509 Certificates, Kerberos, or LDAP SASL. For more information, please review the [authenticationMechanisms](https://www.mongodb.com/docs/manual/reference/parameters/#mongodb-parameter-param.authenticationMechanisms) documentation.
 
 
 ### Launching
