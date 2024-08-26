@@ -52,26 +52,30 @@ The directories have bee created with the correct permissions applied.
 
 The following flags must be supplied to the container when starting:
 
-*[--port](https://www.mongodb.com/docs/manual/reference/program/mongod/#std-option-mongod.--port)*: The TCP port on which the MongoDB instance listens for client connections. The default is 27017. STIGs recommend not running on the default port.
+**[--port](https://www.mongodb.com/docs/manual/reference/program/mongod/#std-option-mongod.--port)**: The TCP port on which the MongoDB instance listens for client connections. The default is 27017. STIGs recommend not running on the default port.
 
-*[--dbpath](https://www.mongodb.com/docs/manual/reference/program/mongod/#std-option-mongod.--dbpath)*: The directory where the mongod instance stores its data. *NOTE:* the Dockerfile assumes this path is `/data/db`. Changing this path will require you to change the ownership and permissions of the data directory in the Dockerfile.
+**[--dbpath](https://www.mongodb.com/docs/manual/reference/program/mongod/#std-option-mongod.--dbpath)**: The directory where the mongod instance stores its data. *NOTE:* the Dockerfile assumes this path is `/data/db`. Changing this path will require you to change the ownership and permissions of the data directory in the Dockerfile.
 
-*[--logpath](https://www.mongodb.com/docs/manual/reference/program/mongod/#std-option-mongod.--logpath)*: Sends all diagnostic logging information to a log file instead of to standard output or to the host's syslog system. MongoDB creates the log file at the path you specify. *NOTE:* the Dockerfile assumes this path is `/data/logs`. Changing this path will require you to change the ownership and permissions of the logs directory in the Dockerfile.
+**[--logpath](https://www.mongodb.com/docs/manual/reference/program/mongod/#std-option-mongod.--logpath)**: Sends all diagnostic logging information to a log file instead of to standard output or to the host's syslog system. MongoDB creates the log file at the path you specify. *NOTE:* the Dockerfile assumes this path is `/data/logs`. Changing this path will require you to change the ownership and permissions of the logs directory in the Dockerfile.
 
-*[--auditDestination](https://www.mongodb.com/docs/manual/reference/program/mongod/#std-option-mongod.--auditDestination)*: Enables auditing and specifies where mongod sends all audit events. *NOTE:* the Dockerfile assumes this path is `/data/auditlog/auditLog.bson`. Changing this path will require you to change the ownership and permissions of the data audit logs in the Dockerfile.
+**[--auditDestination](https://www.mongodb.com/docs/manual/reference/program/mongod/#std-option-mongod.--auditDestination)**: Enables auditing and specifies where mongod sends all audit events. *NOTE:* the Dockerfile assumes this path is `/data/auditlog/auditLog.bson`. Changing this path will require you to change the ownership and permissions of the data audit logs in the Dockerfile.
 
-*[--auditFormat](https://www.mongodb.com/docs/manual/reference/program/mongod/#std-option-mongod.--auditFormat): Specifies the format of the output file for auditing if `--auditDestination` is file. 
+**[--auditFormat](https://www.mongodb.com/docs/manual/reference/program/mongod/#std-option-mongod.--auditFormat)**: Specifies the format of the output file for auditing if `--auditDestination` is file. 
 
 --auditPath /data/auditlog/auditLog.bson \
-*[--auth]()*: Enables authorization to control user's access to database resources and operations. When authorization is enabled, MongoDB requires all clients to authenticate themselves first in order to determine the access for the client.
 
-*[--noscripting](https://www.mongodb.com/docs/manual/reference/program/mongod/#std-option-mongod.--noscripting)*: Disables the scripting engine.
+**[--auth]()**: Enables authorization to control user's access to database resources and operations. When authorization is enabled, MongoDB requires all clients to authenticate themselves first in order to determine the access for the client.
 
-*[--redactClientLogData](https://www.mongodb.com/docs/manual/reference/program/mongod/#std-option-mongod.--redactClientLogData)*: A mongod running with `--redactClientLogData` redacts any message accompanying a given log event before logging. This prevents the mongod from writing potentially sensitive data stored on the database to the diagnostic log. Metadata such as error or operation codes, line numbers, and source file names are still visible in the logs.
+**[--noscripting](https://www.mongodb.com/docs/manual/reference/program/mongod/#std-option-mongod.--noscripting)**: Disables the scripting engine.
 
-*[--setParameter auditAuthorizationSuccess=true](https://www.mongodb.com/docs/manual/reference/parameters/#mongodb-parameter-param.auditAuthorizationSuccess)*: Enables the auditing of authorization successes for the authCheck action.
+**[--redactClientLogData](https://www.mongodb.com/docs/manual/reference/program/mongod/#std-option-mongod.--redactClientLogData)**: A mongod running with `--redactClientLogData` redacts any message accompanying a given log event before logging. This prevents the mongod from writing potentially sensitive data stored on the database to the diagnostic log. Metadata such as error or operation codes, line numbers, and source file names are still visible in the logs.
 
-*[--setParameter authenticationMechanisms=SCRAM-SHA-256](https://www.mongodb.com/docs/manual/reference/parameters/#mongodb-parameter-param.authenticationMechanisms)*: Specifies the list of authentication mechanisms the server accepts. Set this to one or more of the following values. If you specify multiple values, use a comma-separated list and no spaces. This should be set to `SCRAM-SHA-256` unless using X.509 Certificates, Kerberos, or LDAP SASL. For more information, please review the [authenticationMechanisms](https://www.mongodb.com/docs/manual/reference/parameters/#mongodb-parameter-param.authenticationMechanisms) documentation.
+**[--setParameter auditAuthorizationSuccess=true](https://www.mongodb.com/docs/manual/reference/parameters/#mongodb-parameter-param.auditAuthorizationSuccess)**: Enables the auditing of authorization successes for the authCheck action.
+
+**[--setParameter authenticationMechanisms=SCRAM-SHA-256](https://www.mongodb.com/docs/manual/reference/parameters/#mongodb-parameter-param.authenticationMechanisms)*8: Specifies the list of authentication mechanisms the server accepts. Set this to one or more of the following values. If you specify multiple values, use a comma-separated list and no spaces. This should be set to `SCRAM-SHA-256` unless using X.509 Certificates, Kerberos, or LDAP SASL. For more information, please review the [authenticationMechanisms](https://www.mongodb.com/docs/manual/reference/parameters/#mongodb-parameter-param.authenticationMechanisms) documentation.
+
+
+### Launching
 
 The following docker commands will create volumes for mongdb_data, mongodb_logs and mongodb_audit. These volumes will be used to store the MongoDB data, logs and audit logs respectively. These volumes will then be used to launch the Docker image which will run on port 27018.
 
