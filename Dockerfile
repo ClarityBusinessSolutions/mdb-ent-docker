@@ -14,6 +14,7 @@ COPY /config/* /tmp/mongo_install/
 COPY /packages/gosu /usr/local/bin/gosu
 COPY /packages/js-yaml.js /
 COPY /scripts/docker-entrypoint.sh /usr/local/bin/
+COPY /resources/mongod.conf /etc/mongod.conf
 
 RUN set -eux \
     && dnf update -y --nodocs --disableplugin=subscription-manager \
@@ -32,8 +33,13 @@ RUN set -eux \
     && rm -rf /tmp/mongo_install \
     && dnf clean all \
     && rm -rf /var/cache/yum \
+    # Rule Version (STIG-ID): MD7X-00-002400, MD7X-00-002500, MD7X-00-002700
+    && chown mongod:mongod /etc/mongod.conf \
+    # Rule Version (STIG-ID): MD7X-00-002300, MD7X-00-005500, MD7X-00-005600
+    && chmod 600 /etc/mongod.conf \
     && chmod +x /usr/local/bin/gosu \
     && mkdir -p /data/db /data/configdb /data/logs /data/auditlog \
+    # Rule Version (STIG-ID): MD7X-00-002800
     && chown -R mongodb:mongodb /data/db /data/configdb /data/logs /data/auditlog \
     && chmod 700 /data/auditlog \
     && chmod -R 750 /data/db /data/configdb /data/logs \
@@ -47,7 +53,7 @@ USER mongodb:mongodb
 ENTRYPOINT ["docker-entrypoint.sh"]
 
 EXPOSE 27017
-CMD ["mongod"]
+CMD ["mongod", "-f", "/etc/mongod.conf"]
 
 HEALTHCHECK NONE
 
